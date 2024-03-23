@@ -1,0 +1,9 @@
+select * drinks and their ingredients:
+
+SELECT d.id AS drink_id, d.name AS drink_name,
+    GROUP_CONCAT(CONCAT(i.name, ' (', di.quantity, ')') SEPARATOR ', ') AS ingredients_with_quantity
+FROM drink d
+JOIN drink_ingredient di ON d.id = di.drink_id
+JOIN ingredient i ON di.ingredient_id = i.id
+GROUP BY d.id, d.name
+ORDER BY d.id;
